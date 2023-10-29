@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 个人信息配置 {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'plugin/bootstrap-select/css/bootstrap-select.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugin/select2/css/select2.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<section class='container'>
+    <!-- / Form -->
+    <form>
+        <!-- / Fieldset Alpha -->
+        <fieldset class='alpha'>
+            <legend><b>1.</b>个人信息</legend>
+            <div class='frow'>
+                <input id='spaceName' placeholder='空间名称' type='text' name="spaceName">
+            </div>
+            <div class='frow'>
+                <input id='tokenValue' placeholder='Token值' type='text' name="tokenValue">
+            </div>
+            <div class='frow'>
+                <a class='next-step' href='#'>下一步!</a>
+            </div>
+        </fieldset>
+        <!-- / Fieldset Beta -->
+        <fieldset class='beta'>
+            <legend><b>2.</b>知识库选择</legend>
+            <div class='frow'>
+        <select class='selectpicker'  id="repotSelect" multiple>
+        </select>
+        </div>
+            <div class='frow'>
+                <a class='prev-step' href='#'>上一步</a>
+            </div>
+            <div class='frow'>
+                <input class='submit' type='submit' value="提交选择">
+            </div>
+        </fieldset>
+        <!-- / Fieldset Charlie -->
+        <fieldset class='charlie'>
+            <legend><b>3.</b>完成</legend>
+            <div class='frow'>
+                 <p id="status">正在下载知识库中~</p>
+            </div>
+        </fieldset>
+    </form>
+</section>
+
+
+{% endblock %}
+
+
+{% block js %}
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'plugin/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'plugin/bootstrap-select/js/i18n/defaults-zh_CN.min.js' %}"></script>
+<script src="{% static 'plugin/select2/js/select2.min.js' %}"></script>
+<script src="{% static 'plugin/select2/js/i18n/zh-CN.js' %}"></script>
+
+{% endblock %}

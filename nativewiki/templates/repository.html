@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 知识库 {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-list" aria-hidden="true"></i> 我的知识库</div>
+            <div class="panel-body">
+<!--                    {% for repo in repo_list %}-->
+                    <div class="item">
+                        <a href="/wikidetail/{{repo.repo_id }}" class="title" style="background-color: #00a8c6">{{repo.name}}</a>
+                        <div class="info">
+                            <div>
+                                <a href="/wikidetail/{{repo.repo_id }}">
+                                    <i class="fa fa-star" aria-hidden="true" style="color: #d5d5d5"></i>
+                                </a>
+                                <span>{{repo.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+<!--                    {% endfor %}-->
+            </div>
+        </div>
+
+{% endblock %}
+
+
+{% block js %}
+	<script>
+
+	</script>
+
+{% endblock %}

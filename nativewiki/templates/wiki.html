@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block title %} Wiki {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/wiki.css' %}">
+<link rel="stylesheet" href="{% static 'plugin/editor-md/css/editormd.preview.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div>
+                <i class="fa fa-book" aria-hidden="true"></i> {% change_id_name id=repo_id %}
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-3 title-list">
+                <div class="row"> <div id="treeview9" class=""></div></div>
+
+            </div>
+            <div class="col-sm-9 content">
+
+                    {% if wiki_object %}
+                        <div id="previewMarkdown">
+                            <textarea>{{ wiki_object.content }}</textarea>
+                        </div>
+                    {% else %}
+                        <div style="text-align: center;margin-top: 50px;">
+                            <h4> 《{% change_id_name id=repo_id %}》知识库</h4>
+                        </div>
+                    {% endif %}
+
+            </div>
+            <div></div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'plugin/editor-md/editormd.min.js' %}"></script>
+    <script src="{% static 'plugin/editor-md/lib/marked.min.js' %}"></script>
+    <script src="{% static 'plugin/editor-md/lib/prettify.min.js' %}"></script>
+    <script src="{% static 'plugin/editor-md/lib/raphael.min.js' %}"></script>
+    <script src="{% static 'plugin/editor-md/lib/underscore.min.js' %}"></script>
+    <script src="{% static 'plugin/editor-md/lib/sequence-diagram.min.js' %}"></script>
+    <script src="{% static 'plugin/editor-md/lib/flowchart.min.js' %}"></script>
+    <script src="{% static 'plugin/editor-md/lib/jquery.flowchart.min.js' %}"></script>
+<script src="{% static 'plugin/tree/js/bootstrap-treeview.js' %}"></script>
+<script type="text/javascript">
+    $(function () {
+        var res_data = '[' +
+            '{' +
+            '"text": "Parent 1",' +
+            '"nodes": [' +
+            '{' +
+            '"text": "Child 1",' +
+            '"nodes": [' +
+            '{' +
+            '"text": "Grandchild 1"' +
+            '},' +
+            '{' +
+            '"text": "Grandchild 2"' +
+            '}' +
+            ']' +
+            '},' +
+            '{' +
+            '"text": "Child 2"' +
+            '}' +
+            ']' +
+            '},' +
+            '{' +
+            '"text": "Parent 2"' +
+            '},' +
+            '{' +
+            '"text": "Parent 3"' +
+            '},' +
+            '{' +
+            '"text": "Parent 4"' +
+            '},' +
+            '{' +
+            '"text": "Parent 5"' +
+            '}' +
+            ']';
+        initCatalog();
+        initTree(res_data);
+        initPreivewMarkdown();
+
+    });
+
+function initCatalog() {
+            $.ajax({
+                url: "{% url 'initcatalogue' repo_id=repo_id %}",
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.status) {
+                       initTree(res.data);
+                    } else {
+
+                    }
+                }
+            })
+
+};
+
+function initTree(data) {
+        var $tree = $('#treeview9').treeview({
+            data: data,
+          showBorder: false,
+            enableLinks: true,
+            });
+    };
+
+        function initPreivewMarkdown() {
+            editormd.markdownToHTML("previewMarkdown", {
+                htmlDecode: "style,script,iframe"
+            });
+        };
+</script>
+
+
+{% endblock %}
