@@ -17,8 +17,10 @@
 
     配置个人基本信息namespace、Token
     ![Local Image](images/1.png)
+  
     选择要下载的知识库
     ![Local Image](images/2.png)
+  
     等待下载完成，跳转到个人知识库页面
     ![Local Image](images/3.png)
     个人知识库列表页面
